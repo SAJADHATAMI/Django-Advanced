@@ -1,0 +1,25 @@
+{
+  "name": "django advanced 2",
+  // آدرس فایل داکر کامپوز شما نسبت به این فایل
+  "dockerComposeFile": "../docker-compose.yml",
+  // نام سرویسی در داکر کامپوز که می‌خواهید VS Code به آن وصل شود
+  "service": "backend",
+  // مسیری در داخل کانتینر که پروژه باید در آنجا باز شود
+  "workspaceFolder": "/app",
+  
+  // (اختیاری) اکستنشن‌هایی که دوست دارید به محض باز شدن کانتینر، داخل آن نصب باشند
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "Baptiste-Darthenay.Django",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        "mtxr.sqltools"
+      ]
+    }
+  },
+  "shutdownAction": "stopCompose",
+  "overrideCommand": true
+}

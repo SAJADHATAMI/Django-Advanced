@@ -1,0 +1,18 @@
+
+# services
+services:
+  # app service
+  backend:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    image: blogsite-image-2
+    container_name: backend-blog-2
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./blogsite:/app
+
+#    environment:
+#      - SECRET_KEY=test
+#      - DEBUG=True
+#      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
