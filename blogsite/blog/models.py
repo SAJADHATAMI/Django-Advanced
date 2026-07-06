@@ -5,6 +5,10 @@ from ckeditor.fields import RichTextField
 from django.core.files.base import ContentFile
 from django.db import models
 from PIL import Image as PIL_Image
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+
 
 
 class Status(models.TextChoices):
@@ -26,6 +30,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     featured_image = models.ImageField(upload_to="blogs/featured_images/%Y/%m")
     summary = RichTextField()
     content = RichTextField()
@@ -94,7 +99,7 @@ class PostImage(models.Model):
     image = models.ForeignKey(
         "Image", on_delete=models.CASCADE, related_name="post_images"
     )
-    position = models.PositiveIntegerField(default=0)
+    position = models.PositiveIntegerField(default=0, db_index=True)
     add_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -162,6 +167,7 @@ class Comment(models.Model):
     """
 
     name = models.CharField(max_length=200, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(
         Post, related_name="post_comments", on_delete=models.CASCADE
